@@ -1,0 +1,43 @@
+2016-01-12 v.1.1 (yojeg1)
+
+* Now with a taste of Italian, thanks to Dr. Pompeo Lattanzi
+
+2015-06-02 v.1.0 (yojeg)
+
+* Added offline functionality (cache manifest)
+* Extended CSV export fields at Daniel Wollschlaeger's suggestion
+
+2015-02-10 v.0.6b (povidlo6)
+
+* Reduced scale of synth target, to fit 99% red circle label text.
+* Added German linguistic version, thanks to Alexander Birtschenko
+* Adjusted CSS to fit language selector + cosmetic changes, thanks to
+  Dragonsshout
+* Increased inch display precision to 2 digits after dot
+
+2015-01-23 v.0.5b (povidlo5)
+
+* Corrected some French translation strings
+* Added "Help" pane with references to official docs, links, thanks, etc.
+* Added home URL stamp to exported images
+
+2015-01-20 v.0.4b (povidlo4)
+
+* Fixed an obscure mac os bug with validation of project parameters (thanks to
+  Dragonsshout)
+
+2015-01-19 v.0.3b (povidlo3)
+
+* Layout adjusted to fit "no target available" warning to window.
+* Hit probability slider hidden in analysis pane, until there are things to
+  analyse.
+* "Nothing to analyse" message displayed, if no shots marked.
+
+2015-01-16 v.0.2b (povidlo2)
+
+* Lots of inches-yards-related bugs corrected in analysis and target panes.
+* "OK" button in project properties is now dimmed rather than hidden
+
+2015-01-15 v.0.1b (povidlo)
+
+First [early beta] release

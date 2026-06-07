@@ -1,0 +1,9 @@
+Known bugs for TARAN v.0.3b
+
+* Language selector only shows the beginning of the language string.
+
+There is not enough place on the left toolbar to display the full language
+string, only the beginning of the language name is displayed. 
+
+* When deleting last shot from a group, the shot delete button remains visible
+(but does not do anything).

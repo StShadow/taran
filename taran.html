@@ -1,0 +1,213 @@
+<!DOCTYPE HTML> 
+<meta charset="UTF-8" /> 
+<html manifest="taran.manifest">
+    <head>
+        <link rel="stylesheet" type="text/css" href="taran.css" />
+        <title>TARAN -- shooting precision calculator</title>
+    </head>
+    <body>
+    <div class="container">
+        <div class="pane-toolbar">
+            <div id="toolbox-general">
+                <div class="toolbar-vert" id="toolbar-panes">
+                    <input type="button" class="tb-btn" value="" id="tb-btn-project" />
+                    <div class="toolbar-lighter hidden" id="toolbar-project">
+                        <input type="button" class="tb-btn-lighter" value="" id="tb-btn-project-new" />
+                        <input type="button" class="tb-btn-lighter" value="" id="tb-btn-project-open" />
+                        <input type="button" class="tb-btn-lighter" value="" id="tb-btn-project-save" />
+                    </div>
+                    <input type="button" class="tb-btn" value="" id="tb-btn-target" />
+                    <div class="toolbar-lighter hidden" id="toolbar-target">
+                        <input type="button" class="tb-btn-lighter" value="" id="tb-btn-target-save-img" />
+                    </div>
+                    <input type="button" class="tb-btn" value="" id="tb-btn-analysis" />
+                    <div class="toolbar-lighter hidden" id="toolbar-analysis">
+                        <input type="button" class="tb-btn-lighter" value="" id="tb-btn-analysis-save" />
+                        <input type="button" class="tb-btn-lighter" value="" id="tb-btn-analysis-export-csv" />
+                    </div>
+                </div>
+                <div id="language-block">
+                    <hr />
+                    <select id="language-selector">
+                    </select>
+                    <hr />
+                </div>
+                <div class="toolbar-vert">
+                    <input type="button" class="tb-btn" value="" id="tb-btn-help" />
+                </div>
+            </div>
+            <div id="toolbox-addimg" class="hidden">
+                <div class="toolbar-vert">
+                    <input type="button" class="tb-btn" value="" id="tb-btn-img-rotate-left" />
+                    <input type="button" class="tb-btn" value="" id="tb-btn-img-rotate-right" />
+                    <hr />
+                    <input type="button" class="tb-btn" value="" id="tb-btn-ok" />
+                    <input type="button" class="tb-btn" value="" id="tb-btn-cancel" />
+                </div>
+            </div>
+        </div>
+        <!-- end toolbar pane  -->
+        <div class="pane-content" id="pane-content-project">
+            <div class="header" id="project-info-string">TARAN</div>
+            <div id="block-proj-info-display">
+                <!--
+                <table id="table-info-proj"><tbody>
+                    <tr><th colspan="2" id="info-proj-description">Deadly assassin operator tactical ninja sniper. Of death.</th></tr>
+                    <tr><th id="info-proj-metric-label">Units:</th><td id="info-proj-metric">metric</td></tr>
+                    <tr><th id="info-proj-distance-label">Distance:</th><td id="info-proj-distance">100 km</td></tr>
+                    <tr><th id="info-proj-calibre-label">Calibre:</th><td id="info-proj-calibre">100500 mm</td></tr>
+                </tbody></table>
+                -->
+                <input type="button" id="proj-input-btn-edit" value="Edit">
+            </div>
+            <div id="block-proj-info-edit">
+                <table id="table-info-proj-edit"><tbody>
+                    <tr>
+                        <th id="proj-input-desc-label">Description:</th>
+                        <td><input type="text" value="" id="proj-input-desc" /></td>
+                        <td id="proj-input-desc-note"></td>
+                    </tr>
+                    <tr>
+                        <th id="proj-input-units-label">Units:</th>
+                        <td><select id="proj-input-units">
+                            <option id="proj-input-units-metric" value="metric">Metric</option>
+                            <option id="proj-input-units-imp" value="imp">"Imperial"</option>
+                            </select>
+                        </td>
+                        <td id="proj-input-units-note"></td>
+                    </tr>
+                    <tr>
+                        <th id="proj-input-dist-label">Distance, m:</th>
+                        <td><input type="number" min="5" max="3000" value="100" id="proj-input-dist" /></td>
+                        <td id="proj-input-dist-note"></td>
+                    </tr>
+                    <tr>
+                        <th id="proj-input-cal-label">Calibre, mm:</th>
+                        <td><input type="number" min="0.1" max="20" step="any" value="7.62" id="proj-input-cal" /></td>
+                        <td id="proj-input-cal-note"></td>
+                    </tr>
+                </tbody></table>
+                <!-- <input type="button" class="hidden" id="proj-input-btn-ok" value="OK"> -->
+                <input type="button" disabled id="proj-input-btn-ok" value="OK">
+                <input type="button" class="hidden" id="proj-input-btn-cancel" value="Cancel">
+            </div>
+            <hr />
+            <div id="targets-info-container">
+            </div>
+        </div>
+        <!-- end project pane  -->
+        <div class="pane-content hidden" id="pane-content-addimg">
+            <div class="header" id="addimg-title">New target preview</div>
+            <div id="addimg-scaledown-block">
+                <input type="checkbox" id="addimg-scaledown" name="addimg-scaledown" value="doscaledown" checked="checked" />
+                <span id="addimg-scaledown-description">Optimise image resolution (improves performance)</span><br>
+            </div>
+            <canvas id="rotate-tn-canvas" width="400" height="400"></canvas>
+            <canvas id="rotate-bg-canvas" width="1000" height="1000" class="hidden"></canvas>
+        </div>
+        <!-- end addimg pane  -->
+        <div class="pane-content hidden" id="pane-content-target">
+            <div class="content-left">
+                <div class="header" id="target-lp-header">Target</div>
+                <div class="toolbar-leftpane">
+                    <input type="button" class="tb-btn-leftpane" value="" id="tb-btn-target-prev" />
+                    <input type="button" class="tb-btn-leftpane" value="" id="tb-btn-target-icon" />
+                    <input type="button" class="tb-btn-leftpane" value="" id="tb-btn-target-next" />
+                </div>
+                <canvas id="target-thumbnail" width="192" height="10"></canvas>
+                <hr />
+                <div id="groups-info-container"></div>
+                <hr />
+                <div class="header">
+                    <table><tbody><tr>
+                    <td><input type="checkbox" id="target-show-infoboxes-check" value="" /></td>
+                    <td><span id="target-show-infoboxes-text">display infoboxes</span></td>
+                    </tr></tbody></table>
+                </div>
+                <hr />
+            </div>
+            <div class="content-main" id="canvasbox">
+                <canvas id="imgCanvas" width="800" height="600"></canvas>
+                <div class="toolbar-hori">
+                    <span class="toolbar-hori-btngroup" id="toolbar-target-zoom">
+                        <input type="button" class="tb-btn-lighter" value="" id="tb-btn-img-zoomout" />
+                        <input type="button" class="tb-btn-lighter" value="" id="tb-btn-img-zoomfit" />
+                        <input type="button" class="tb-btn-lighter" value="" id="tb-btn-img-zoomin" />
+                    </span>
+                    <span class="toolbar-hori-btngroup" id="toolbar-target-scale">
+                        <input type="button" class="tb-btn-lighter" value="" id="tb-btn-scale" />
+                        <input type="number" min="0.1" max="500" step="any" value="0" class="hidden" id="input-scale" />
+                        <span id="input-scale-units"></span>
+                        <input type="button" class="tb-btn-lighter tb-btn-confirm" value="" id="tb-btn-scale-confirm" />
+                        <input type="button" class="tb-btn-lighter tb-btn-cancel" value="" id="tb-btn-scale-cancel" />
+                    </span>
+                    <span class="toolbar-hori-btngroup" id="toolbar-target-group">
+                        <input type="button" class="tb-btn-lighter" value="" id="tb-btn-group-add" />
+                        <input type="button" class="tb-btn-lighter" value="" id="tb-btn-group-del" />
+                        <input type="button" class="tb-btn-lighter tb-btn-confirm" value="" id="tb-btn-groupadd-confirm" />
+                        <input type="button" class="tb-btn-lighter tb-btn-cancel" value="" id="tb-btn-groupadd-cancel" />
+                    </span>
+                    <span class="toolbar-hori-btngroup" id="toolbar-target-shot">
+                        <input type="button" class="tb-btn-lighter" value="" id="tb-btn-shot-add" />
+                        <input type="button" class="tb-btn-lighter" value="" id="tb-btn-shot-del" />
+                        <input type="button" class="tb-btn-lighter tb-btn-confirm" value="" id="tb-btn-shotadd-confirm" />
+                        <input type="button" class="tb-btn-lighter tb-btn-cancel" value="" id="tb-btn-shotadd-cancel" />
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- end target pane  -->
+        <div class="pane-content hidden" id="pane-content-analysis">
+            <div id="synth-slider-box">
+                0%<input type="range" id="synth-also-slider" min=0 value=0 max=99 step=1 />99%
+                <hr />
+                <span id="synth-also-slider-text"></span>
+            </div>
+            <div id="svgcan"></div>
+        </div>
+        <!-- end analysis pane  -->
+        <div class="pane-content hidden" id="pane-content-help">
+            <h1 id="help-docs-title">Documentation</h1>
+            <span id="help-docs-content">
+                <p>Home page: <a href="http://guns.ptosis.ch/taran-en">http://guns.ptosis.ch/taran-en</a></p>
+                <p>User manual: <a href="http://guns.ptosis.ch/node/26">http://guns.ptosis.ch/node/26</a></p>
+                <p>FAQ: <a href="http://guns.ptosis.ch/faq-page">http://guns.ptosis.ch/faq-page</a></p>
+                <p>Download latest version: <a href="http://guns.ptosis.ch/node/43">http://guns.ptosis.ch/node/43</a></p>
+                <p>Use latest version online: <a href="http://taran.ptosis.ch/">http://taran.ptosis.ch/</a></p>
+            </span>
+            <h1 id="help-inspir-title">Inspiration</h1>
+            <p>The Ballistipedia guys (David Bookstaber, Charles McMillan, and Daniel Wollschlaeger): <a href="http://ballistipedia.com/">http://ballistipedia.com/</a></p>
+            <p>Louis Stange's "Group Size, AMR, CEP, and Hit Probability" Monte Carlo simulation: <a href="https://github.com/lstange/mcgs">https://github.com/lstange/mcgs</a></p>
+            <p>All the excellent sources listed on the Ballistipedia's prior art page: <a href="http://ballistipedia.com/index.php?title=Prior_Art">http://ballistipedia.com/index.php?title=Prior_Art</a></p>
+            <h1 id="help-thanks-title">Gratitude goes to</h1>
+            <p>Dmitriy Mayorov (<em>dimview</em> @ LJ): обсуждение, критика, отличные идеи</p>
+            <p><em>Dragonsshout</em> @ FL: v.0.4 bugfix / validation de paramètres sur Mac OS<br/>v.0.6 amélioration de CSS</p>
+            <p><em>Molon Labe</em> @ FL: Traduction du Manuel Utilisateur en français</p>
+            <p>Alexander Birtschenko (<em>abirtschenko</em> @ LJ): Übersetzung ins Deutsche</p>
+            <p>Pompeo Lattanzi (<em>britishlanguagecorner.it</em>): traduzione italiana</p>
+        </div>
+        <!-- end analysis pane  -->
+    </div>
+    <!-- end content container  -->
+    <div class="hidden">
+        <a href="#" id="download-img" download="taran-target.png">Hidden control to download image</a>
+        <a href="#" id="download-file" download="file">Hidden control to download file</a>
+        <input type="file" id="input-open-project" accept=".xml" />
+        <input type="file" id="fileSelector" accept="image/*">
+    </div>
+        <script src="lang-bang.js"></script>
+        <script src="lang-en.js"></script>
+        <script src="lang-fr.js"></script>
+        <script src="lang-de.js"></script>
+        <script src="lang-it.js"></script>
+        <script src="lang-ru.js"></script>
+        <script src="trous.js"></script>
+        <script src="image-pane.js"></script>
+        <script src="addimg-pane.js"></script>
+        <script src="proj-pane.js"></script>
+        <script src="synth-pane.js"></script>
+        <script src="help-pane.js"></script>
+        <script src="toolbar.js"></script>
+        <script src="precan-main.js"></script>
+    </body>
+</html>
