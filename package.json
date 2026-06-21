@@ -1,0 +1,12 @@
+{
+  "name": "taran",
+  "version": "1.1.0",
+  "description": "Target analysis and shooting precision calculator",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.8"
+  }
+}

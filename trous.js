@@ -95,7 +95,7 @@ function getImageBase64(image) {
 
 function valFromXMLnode(xmlnode, name, neednumber) {
     // var n = ;
-    if ( (!xmlnode.getElementsByTagName(name)) || (!xmlnode.getElementsByTagName(name)[0].childNodes[0]) ) {
+    if ( (!xmlnode.getElementsByTagName(name)) || (xmlnode.getElementsByTagName(name).length === 0) || (!xmlnode.getElementsByTagName(name)[0].childNodes[0]) ) {
         console.log("fromXMLnode nonefound for " + name);
         return "";
     }
@@ -495,4 +495,20 @@ function Samevik() {
     // initialise the global synthSVG object
     synthSVG = new SynthSVG(document.getElementById('svgcan'));
 } // Samevik constructor
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        distBetween: distBetween,
+        Shot: Shot,
+        GroupStats: GroupStats,
+        Group: Group,
+        Sheet: Sheet,
+        Samevik: Samevik,
+        valFromXMLnode: valFromXMLnode,
+        escapeXML: escapeXML,
+        unescapeXML: unescapeXML,
+        stripXMLSpecials: stripXMLSpecials
+    };
+}
+
 
