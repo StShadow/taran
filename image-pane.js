@@ -865,6 +865,63 @@ function listenerInfoboxesToggle(evt) {
 } // function listenerInfoboxesToggle(evt)
 
 
+function listenerTargetKeyDown(evt) {
+    if (activepane !== 'target') {
+        return;
+    }
+    if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA' || document.activeElement.tagName === 'SELECT')) {
+        return;
+    }
+    var key = evt.key || String.fromCharCode(evt.keyCode || evt.which);
+    if (!key) {
+        return;
+    }
+    key = key.toLowerCase();
+    
+    if (key === 'a') {
+        if (ctrlmode === 'base') {
+            if (csheet && csheet.scale) {
+                listenerBtnGroupAdd(evt);
+            }
+        } else if (ctrlmode === 'addgroup') {
+            if (point.x !== null) {
+                listenerBtnGroupAddConfirm(evt);
+            }
+        }
+    } else if (key === 's') {
+        if (ctrlmode === 'addgroup') {
+            if (point.x !== null) {
+                listenerBtnGroupAddCancel(evt);
+            }
+        } else if (ctrlmode === 'base') {
+            if (cgroup) {
+                listenerBtnGroupDel(evt);
+            }
+        }
+    } else if (key === 'd') {
+        if (ctrlmode === 'base') {
+            if (cgroup && csheet && csheet.scale) {
+                listenerBtnShotAdd(evt);
+            }
+        } else if (ctrlmode === 'addshot') {
+            if (point.x !== null) {
+                listenerBtnShotAddConfirm(evt);
+            }
+        }
+    } else if (key === 'f') {
+        if (ctrlmode === 'addshot') {
+            if (point.x !== null) {
+                listenerBtnShotAddCancel(evt);
+            }
+        } else if (ctrlmode === 'base') {
+            if (cgroup && cgroup.shots && cgroup.shots.length > 0) {
+                listenerBtnShotDel(evt);
+            }
+        }
+    }
+} // function listenerTargetKeyDown(evt)
+
+
 function initImgPane() {
     document.getElementById('fileSelector').addEventListener('change', handleFileSelection, false);
     document.getElementById('tb-btn-target-save-img').addEventListener('click', saveTargetImage, false);
@@ -894,6 +951,8 @@ function initImgPane() {
     document.getElementById('groups-info-container').addEventListener('click', listenerGroupsInfoClick, false);
 
     document.getElementById('target-show-infoboxes-check').addEventListener('change', listenerInfoboxesToggle, false);
+    
+    window.addEventListener('keydown', listenerTargetKeyDown, false);
     
     setCtrlMode('none');
 } // function initImgPane()
